@@ -9,9 +9,10 @@ plot3 <- function () {
 	pwrdata$datetime <- strptime(paste(pwrdata$Date, pwrdata$Time), format("%d/%m/%Y %H:%M:%S"))
 
 	## Plot Sub_metering data in one plot
-	plot(pwrdata$datetime, pwrdata$Sub_metering_1, type="n", pch=22, ylim=c(0,maxy))
-	plot(pwrdata$datetime, pwrdata$Sub_metering_2, type="n", pch=22, ylim=c(0,maxy))
-	plot(pwrdata$datetime, pwrdata$Sub_metering_3, type="n", pch=22, ylim=c(0,maxy), xlab="", ylab="Energy sub metering")
+	maxy <- max(pwrdata$Sub_metering_1, pwrdata$Sub_metering_2, pwrdata$Sub_metering_3)
+	plot(pwrdata$datetime, pwrdata$Sub_metering_1, type="n", pch=22, ylim=c(0,maxy), xlab="", ylab="Energy sub metering")
+	points(pwrdata$datetime, pwrdata$Sub_metering_2, type="n")
+	points(pwrdata$datetime, pwrdata$Sub_metering_3, type="n")
 	lines(pwrdata$datetime, pwrdata$Sub_metering_1, col="black")
 	lines(pwrdata$datetime, pwrdata$Sub_metering_2, col="red")
 	lines(pwrdata$datetime, pwrdata$Sub_metering_3, col="blue")
